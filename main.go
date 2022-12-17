@@ -11,11 +11,12 @@ import (
 func receiveBaton(waitGroup *sync.WaitGroup, baton chan string, id int) {
 	timeSleeping := time.Duration(rand.Int31n(1000)) * time.Millisecond
 	id = id + 1
+	isLast := (id+1) > 4
 	person := "Runner " + strconv.Itoa(id)
 	baton <- person
 	time.Sleep(timeSleeping)
 	fmt.Println("The " + person + " with the baton. TIME = ", timeSleeping)
-	if (id+1) > 4 {
+	if isLast {
 		fmt.Println("The race is over.")
 		waitGroup.Done()
 		return
