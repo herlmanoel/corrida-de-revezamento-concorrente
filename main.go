@@ -22,7 +22,7 @@ func receiveBaton(waitGroup *sync.WaitGroup, baton chan string, id int) {
 		return
 	}
 	waitGroup.Done()
-	receiveBaton(waitGroup, baton, id)
+	go receiveBaton(waitGroup, baton, id)
 }
 
 func main() {
